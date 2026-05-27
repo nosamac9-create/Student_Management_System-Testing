@@ -91,7 +91,7 @@ The full project report — including truth tables, input domain models, control
 - Joury Ghorab 
 - Jana Akkad 
 
-## 🙏 Credits
+##  Credits
 
 The **Student Management System** application being tested in this repository was developed by [**Mohammed-3tef**](https://github.com/Mohammed-3tef). Full credit for the original codebase goes to them — this fork exists purely for academic testing purposes.
 
