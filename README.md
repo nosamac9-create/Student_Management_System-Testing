@@ -1,157 +1,102 @@
-# Student Management System
+#  Coverage-Based Testing of a Java Student Management System
 
-## Overview
+> **CCSW 323 — Software Testing & Validation · University of Jeddah**
 
-The **Student Management System** is a Java-based console application designed to manage student records efficiently. It allows users to perform various operations such as adding, removing, updating, and searching for students. Additionally, it provides features like sorting, filtering, and generating performance summaries. This system is ideal for educational institutions or anyone needing to manage student data in a structured manner.
+This repository is a fork of [Mohammed-3tef/Student_Management_System](https://github.com/Mohammed-3tef/Student_Management_System), extended with a comprehensive **JUnit 5 test suite** that applies three coverage models — **Logic Coverage**, **Input Space Partitioning**, and **Graph Coverage** — to three core functions of the system.
 
----
+The original Java application is unchanged. All testing work, documentation, and analysis in the `tests/` and `report/` folders are our contribution as part of a class project.
 
-## Features
+## 📌 Project Overview
 
-### 1. **Add Student**
-- Add a new student with unique name and ID.
-- Input validation ensures valid data for name, ID, age, GPA, year, and department.
+The goal was to design and execute a structured test suite using three different coverage models, with two criteria per model, on a real-world Java console application. The Student Management System (SUT) was chosen because it is fully backend, uses only the Java standard library, and has enough decisions, loops, and branches to exercise all three models meaningfully.
 
-### 2. **Remove Student**
-- Remove a student by their unique ID.
+## 🎯 Testing Approach
 
-### 3. **Update Student**
-- Update a student's information (name, age, GPA, year, or department) using their ID.
+| Model | Function Under Test | Criterion 1 | Criterion 2 |
+|-------|---------------------|-------------|-------------|
+| **Logic Coverage** | `displayTop5()` | Predicate Coverage (PC) | Correlated Active Clause Coverage (CACC) |
+| **Input Space Partitioning** | `mergeStudentSystem()` | Each Choice Coverage (ECC) | Base Choice Coverage (BCC) |
+| **Graph Coverage** | `removeStudentByID()` | Node Coverage (NC) | Prime Path Coverage (PPC) |
 
-### 4. **Search Student**
-- Search for a student by their ID.
+**Total: 30 test cases** (5 per criterion × 2 criteria × 3 models)
 
-### 5. **List and Sort Students**
-- List all students sorted by GPA, ID, Name, Year, or Department.
+## 📊 Results
 
-### 6. **Filter Students**
-- Filter students by Age, GPA, Year, or Department.
+| Criterion | Total | Passed | Failed | Pass Rate |
+|-----------|-------|--------|--------|-----------|
+| Predicate Coverage (PC) | 5 | 5 | 0 | 100% |
+| Correlated Active Clause (CACC) | 5 | 5 | 0 | 100% |
+| Each Choice Coverage (ECC) | 5 | 5 | 0 | 100% |
+| Base Choice Coverage (BCC) | 5 | 5 | 0 | 100% |
+| Node Coverage (NC) | 5 | 5 | 0 | 100% |
+| Prime Path Coverage (PPC) | 5 | 5 | 0 | 100% |
+| **TOTAL** | **30** | **30** | **0** | **100%** |
 
-### 7. **Count Total Students**
-- Display the total number of students in the system.
+All 30 tests pass on the current implementation.
 
-### 8. **Calculate Average GPA**
-- Calculate and display the average GPA of all students.
+##  Repository Structure
 
-### 9. **Display Top 5 Students**
-- Display the top 5 performing students based on GPA.
+```
+Student_Management_System/
+├── src/                              # Original SUT (unchanged)
+│   ├── App.java
+│   ├── Student.java
+│   ├── StudentSystem.java
+│   ├── InputValidator.java
+│   ├── CsvFileHandler.java
+│   └── TxtFileHandler.java
+├── tests/                            # ⭐ Our testing contribution
+│   ├── LogicCoverageTest.java        # PC + CACC tests for displayTop5()
+│   ├── InputSpacePartitioningTest.java  # ECC + BCC tests for mergeStudentSystem()
+│   └── GraphCoverageTest.java        # NC + PPC tests for removeStudentByID()
+└── report/                           # ⭐ Documentation
+    ├── CCSW323_Project_Report.pdf    # Full 25-page project report
+    └── Project_Presentation.pdf      # Slide deck
+```
 
-### 10. **Display Failing Students**
-- Display students with a GPA less than 2.0.
+##  Tools Used
 
-### 11. **Generate Summary**
-- Generate a summary including:
-    - Average GPA
-    - Total number of students
-    - Top 5 performing students
-    - Failing students
+- **JUnit 5 (Jupiter)** — Test framework with `@Test`, `@BeforeEach`, `@DisplayName`
+- **Java Standard Library** — `System.setOut` + `ByteArrayOutputStream` for stdout capture
+- **VS Code** — Development and test execution
 
----
+##  Running the Tests
 
-## UML Diagram
+1. Clone this repository
+2. Ensure JUnit 5 is on your classpath
+3. Compile the source and test files together
+4. Run with your IDE's JUnit runner or the JUnit standalone console launcher:
 
-For a detailed UML class diagram of the project, refer to [UML_Diagram.md](https://github.com/Mohammed-3tef/Student_Management_System/blob/main/UML%20Diagram.md).
+```bash
+java -jar junit-platform-console-standalone-1.10.0.jar \
+  --class-path "out:out-tests" \
+  --scan-class-path
+```
 
----
+## 📄 Detailed Report
 
-## How to Use
+The full project report — including truth tables, input domain models, control flow graphs, test case tables, and execution screenshots — is available here:
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Mohammed-3tef/Student_Management_System.git
-   cd Student_Management_System
-   ```
+ **[CCSW323 Project Report (PDF)](report/CCSW323_Project_Report.pdf)**
 
-2. **Compile and Run**:
-    - Compile the Java file:
-      ```bash
-      javac App.java
-      ```
-    - Run the program:
-      ```bash
-      java App
-      ```
+ **[Project Presentation (PDF)](report/Project_Presentation.pdf)**
 
-3. **Follow the Menu**:
-    - The program will display a menu with options. Enter the corresponding number to perform an action.
-    - Follow the prompts to input data or perform operations.
+##  Authors
 
----
+**Course:** CCSW 323 — Software Testing & Validation  
+**Instructor:** Dr. Mona Altherwi  
+**Institution:** University of Jeddah — Department of Software Engineering
 
-## Input Validation
+- Enas Hamed Alqarni 
+- Joury Ghorab 
+- Jana Akkad 
 
-The system ensures all inputs are valid:
-- **Name**: Only letters and spaces.
-- **ID**: Unique positive integer.
-- **Age**: Valid age between 0 and 100.
-- **GPA**: Valid GPA between 0.0 and 4.0.
-- **Year**: Must be one of `First`, `Second`, `Third`, or `Fourth`.
-- **Department**: Must be one of `CS`, `IS`, `AI`, `IT`, or `DS`.
+## 🙏 Credits
 
----
+The **Student Management System** application being tested in this repository was developed by [**Mohammed-3tef**](https://github.com/Mohammed-3tef). Full credit for the original codebase goes to them — this fork exists purely for academic testing purposes.
 
-## Code Structure
+Original repository: https://github.com/Mohammed-3tef/Student_Management_System
 
-### Classes
-1. **`Student`**:
-    - Represents a student with attributes: `name`, `ID`, `age`, `GPA`, `year`, and `department`.
+##  License
 
-2. **`StudentSystem`**:
-    - Manages a list of students and provides methods for adding, removing, updating, searching, sorting, filtering, and generating summaries.
-
-### Methods
-- **Input Validation**:
-    - `inputValidName`, `inputValidID`, `inputValidAge`, `inputValidGPA`, `inputValidYear`, `inputValidDepartment`, `inputValidChoice`.
-- **Student Operations**:
-    - `addStudent`, `removeStudentByID`, `updateStudentByID`, `searchByID`, `listAndSortAllStudents`, `filterByAge`, `filterByGPA`, `filterByYear`, `filterByDepartment`, `countTotalStudents`, `calculateAverageGPA`, `displayTop5`, `displayFailingStudents`, `countStudentsByYear`, `generateSummary`.
-
----
-
-## Example Usage
-
-### Adding a Student
-1. Choose option `1` from the menu.
-2. Enter the student's name, ID, age, GPA, year, and department.
-3. The student will be added to the system.
-
-### Updating a Student
-1. Choose option `3` from the menu.
-2. Enter the student's ID.
-3. Choose the attribute to update (name, age, GPA, year, or department).
-4. Enter the new value.
-
-### Generating a Summary
-1. Choose option `11` from the menu.
-2. The system will display:
-    - Average GPA
-    - Total number of students
-    - Top 5 performing students
-    - Failing students
-
----
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a pull request.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/Mohammed-3tef/Student_Management_System/blob/main/LICENSE) file for details.
-
----
-
-## Acknowledgments
-
-- Thanks to the Java community for providing excellent resources and libraries.
-- Inspired by real-world student management systems.
-
----
-
-## Enjoy managing your students with ease! 🚀
+This testing work was prepared for academic purposes as part of a university course. The original Student Management System follows the license of its upstream repository.
